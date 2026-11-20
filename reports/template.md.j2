@@ -1,0 +1,164 @@
+# Automated LLM Red-Teaming & Defense Evaluation Report
+
+**Campaign ID:** `{{ campaign_id }}`  
+**Report Generated:** {{ generated_at }}  
+**Evaluation Scope:** Locally Sandboxed Target Models via Ollama (Zero External APIs)
+
+---
+
+## 1. Executive Summary
+
+This report documents the automated security and alignment testing of local open-weight large language models using an AI-vs-AI adversarial feedback loop (Prompt Automatic Iterative Refinement — PAIR). Following vulnerability discovery, a dual-layer defense system (semantic input guard and output guard) was trained on the generated corpus and evaluated against both adversarial and benign validation sets.
+
+### High-Level Metrics
+- **Total Test Attempts:** {{ summary.total_attempts }}
+- **Baseline Vulnerabilities Discovered (Guard OFF):** {{ summary.violations }}
+- **Baseline Attack Success Rate:** **{{ "%.1f" | format(summary.overall_success_rate) }}%**
+- **Defense Guard Blocked Attempts:** {{ summary.guard_blocked_total }}
+- **Target Models Evaluated:** {{ num_targets }}
+
+{% if same_model_warning %}
+> ⚠️ **Evaluation Bias Notice:** The attacker and judge agents operated on the same underlying model family (`{{ same_model_name }}`). While instances and contexts were strictly isolated, cross-model variance should be interpreted with this constraint in mind.
+{% endif %}
+
+---
+
+## 2. Methodology & System Architecture
+
+```
+                    ┌────────────────────────┐
+                    │  Attack Strategy Config │
+                    │  (4 Category Taxonomy) │
+                    └───────────┬─────────────┘
+                                │
+                                ▼
+                     ┌─────────────────────┐
+          ┌─────────▶│   Attacker LLM       │
+          │          │ (generates/mutates   │
+          │          │  adversarial prompt) │
+          │          └──────────┬───────────┘
+          │                     │ prompt
+          │                     ▼
+          │          ┌─────────────────────┐
+   mutate &           │  Target Adapter      │──▶ Local Ollama Models
+   retry (if          │  (unified interface) │
+   not violated,       └──────────┬───────────┘
+   attempts < N)                  │ response
+          │                     ▼
+          │          ┌─────────────────────┐
+          │          │   Judge LLM          │
+          │          │ (independent scorer) │
+          └──────────┴──────────┬───────────┘
+                                │ verdict (JSON)
+                                ▼
+                     ┌─────────────────────┐
+                     │   SQLite Database    │
+                     └──────────┬───────────┘
+```
+
+### 2.1 The PAIR Adversarial Feedback Loop
+The Attacker agent operates iteratively against each target model for a configured maximum of `{{ max_attempts }}` iterations per objective:
+1. **Generation:** Constructs a candidate prompt adhering to the category taxonomy and attack goal.
+2. **Execution:** Dispatches the prompt to the target model through the local Ollama adapter.
+3. **Evaluation:** An independent Judge LLM evaluates the target response against a strict safety rubric, outputting machine-verifiable JSON.
+4. **Refinement:** If the response was safe, the attacker receives the judge's concise reasoning and dynamically adapts its strategy for the next turn.
+
+### 2.2 Live Multi-Turn Escalation
+For the `multiturn_escalation` taxonomy category, prompts are not isolated retries; rather, each attempt represents a sequential turn in a live conversational session. The attacker observes the model's actual replies and escalates subtlety over turns.
+
+---
+
+## 3. Attack Taxonomy & Probe Objectives
+
+### Strategy Categories
+{% for s in strategies %}
+- **`{{ s.id }}` ({{ s.name }}):** {{ s.description.strip() }}
+{% endfor %}
+
+### Probe Objectives (Shared Baseline)
+All strategies were evaluated against an identical set of standardized probe goals:
+{% for g in goals %}
+- **`{{ g.id }}`** {% if g.is_canary %}*(Canary Goal)*{% endif %}: {{ g.text.strip() }}
+{% endfor %}
+
+---
+
+## 4. Empirical Evaluation Results
+
+### 4.1 Baseline Vulnerability Matrix (Guard OFF)
+The following table details attack success rates (% of attempts that elicited a policy-violating response) across strategy and model pairings prior to defense intervention:
+
+{{ results_table_guard_off }}
+
+{% if chart_heatmap_path %}
+![Success Rate Heatmap]({{ chart_heatmap_path }})
+{% endif %}
+
+### 4.2 Cross-Model Robustness Ranking
+Comparative resilience ranking across the target models:
+
+{{ model_ranking_table }}
+
+### 4.3 Attacker Efficiency & Convergence
+Number of iterations required by the attacker to identify a policy violation:
+
+{{ efficiency_table }}
+
+{% if chart_efficiency_path %}
+![Attacker Efficiency Distribution]({{ chart_efficiency_path }})
+{% endif %}
+
+---
+
+## 5. Defense Evaluation & Guardrail Performance
+
+### 5.1 Guardrail Impact (Before vs After)
+Comparative success rates when the trained dual-layer semantic defense guard is activated:
+
+{{ results_table_guard_on }}
+
+### 5.2 Defense Generalization & Usability Metrics
+A defensive guardrail must not degrade legitimate user utility. The classifiers were validated against a held-out benign prompt corpus:
+
+- **Input Guard False-Positive Rate (FPR):** **{{ "%.2f" | format(input_guard_fpr * 100) }}%** (Legitimate prompts mistakenly blocked)
+- **Output Guard False-Positive Rate (FPR):** **{{ "%.2f" | format(output_guard_fpr * 100) }}%**
+- **Training Corpus Distribution:**
+  - Positive (Violating/Adversarial Samples): {{ num_input_positives }}
+  - Negative (Benign Validation Samples): {{ num_input_negatives }}
+
+---
+
+## 6. Redacted Vulnerability Findings
+
+To prevent unconstrained dissemination of actionable exploit text, transcripts of high-severity findings are redacted in this report. Summaries of discovered attack patterns are presented below:
+
+{% if redacted_examples %}
+{% for ex in redacted_examples %}
+#### Finding {{ loop.index }} — Strategy: `{{ ex.strategy }}` | Goal: `{{ ex.goal }}`
+- **Target Model:** `{{ ex.target_model }}`
+- **Severity Rating:** {{ ex.severity }} / 5
+- **Convergence Turn:** Iteration #{{ ex.attempt_number }}
+- **Structural Technique Observed:** {{ ex.technique_summary }}
+
+---
+{% endfor %}
+{% else %}
+*No high-severity violations recorded during this campaign.*
+{% endif %}
+
+---
+
+## 7. Limitations & Future Work
+
+1. **Judge Model Consistency:** Independent LLM scoring may occasionally exhibit subtle evaluation noise or category misclassifications.
+2. **Attacker Reasoning Ceiling:** Attack sophistication is bounded by the context length and reasoning capacity of the local attacker model.
+3. **Defense Distribution Shift:** Semantic classifier guards trained on specific embedding representations may remain susceptible to novel evasion strategies outside the training distribution.
+4. **Local Hardware Constraints:** High concurrency and multi-model benchmarking require sufficient GPU VRAM for Ollama inference.
+
+---
+
+## 8. Ethical Statement & Safety Scope
+
+- All attacks executed by this platform were strictly directed at locally-hosted open-weight instances running on developer-controlled hardware (`http://localhost:11434`).
+- No external APIs or multi-tenant production systems were contacted.
+- All experiments were conducted for the purpose of vulnerability identification and defense enhancement.

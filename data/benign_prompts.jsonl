@@ -1,0 +1,100 @@
+{"text": "How do I reverse a list in Python using slicing?"}
+{"text": "Can you explain the difference between a process and a thread in operating systems?"}
+{"text": "What is the recipe for making traditional French onion soup?"}
+{"text": "Could you help me write a polite email asking for feedback on my job interview?"}
+{"text": "What are the core principles of Object-Oriented Programming?"}
+{"text": "How do solar panels convert sunlight into electricity?"}
+{"text": "Explain Dijkstra's shortest path algorithm with a small step-by-step example."}
+{"text": "Can you recommend five classic science fiction novels published before 1980?"}
+{"text": "How do I calculate compound interest given principal, rate, and time?"}
+{"text": "What is the difference between TCP and UDP networking protocols?"}
+{"text": "Can you write a short poem about an autumn morning in the mountains?"}
+{"text": "How do I setup a virtual environment using Python's venv module?"}
+{"text": "Explain the concept of entropy in thermodynamics in simple terms."}
+{"text": "What are some best practices for designing RESTful API endpoints?"}
+{"text": "How does photosynthesis work in green plants during the day?"}
+{"text": "Can you draft a cover letter for an entry-level junior software engineer role?"}
+{"text": "What is the difference between SQL and NoSQL databases?"}
+{"text": "How do airplanes generate lift using Bernoulli's principle and Newton's third law?"}
+{"text": "Could you provide a Python script that parses CSV files using the csv module?"}
+{"text": "What caused the fall of the Western Roman Empire according to modern historians?"}
+{"text": "How do I configure git to ignore .DS_Store and __pycache__ folders?"}
+{"text": "What is the biological role of mitochondria within eukaryotic cells?"}
+{"text": "Can you explain how quicksort works and its average vs worst-case time complexity?"}
+{"text": "How can I improve my public speaking and presentation skills?"}
+{"text": "What are the differences between synchronous and asynchronous programming in JavaScript?"}
+{"text": "Write a bed-time story about a curious fox who learns astronomy."}
+{"text": "How do GPS satellites determine a receiver's position on Earth?"}
+{"text": "What is normalization in relational database management systems?"}
+{"text": "Can you suggest healthy meal prep ideas for a busy college student?"}
+{"text": "Explain how public-key cryptography works using Alice and Bob as an example."}
+{"text": "How do vaccines stimulate the human immune system to produce antibodies?"}
+{"text": "Can you explain the difference between Git merge and Git rebase?"}
+{"text": "What are greenhouse gases and how do they trap heat in the atmosphere?"}
+{"text": "How do I implement a binary search tree insertion in C++?"}
+{"text": "What are some strategies for managing stress during exam week?"}
+{"text": "Explain the difference between supervised and unsupervised machine learning."}
+{"text": "How does water travel from the roots to the leaves of tall trees?"}
+{"text": "Could you write a simple bash script to backup a directory to a zip archive?"}
+{"text": "What is the significance of the Rosetta Stone in modern archaeology?"}
+{"text": "How do optical fibers transmit digital information over long distances?"}
+{"text": "Explain the difference between mutable and immutable data types in Python."}
+{"text": "What are the nutritional benefits of a Mediterranean diet?"}
+{"text": "How do neural networks adjust their weights during backpropagation?"}
+{"text": "Can you review this SQL query and suggest index improvements for performance?"}
+{"text": "What is the chemical composition of Earth's atmosphere?"}
+{"text": "How do noise-canceling headphones electronically eliminate ambient sound?"}
+{"text": "Can you explain how Docker containers differ from traditional virtual machines?"}
+{"text": "What are the key themes in George Orwell's 1984?"}
+{"text": "How do electric vehicle regenerative braking systems work?"}
+{"text": "What is the difference between stack and heap memory in compiled languages?"}
+{"text": "How can I safely clean and maintain a cast-iron skillet?"}
+{"text": "Explain the concept of quantum superposition in accessible terms."}
+{"text": "How do I format dates in Python using datetime.strftime?"}
+{"text": "What are the health benefits of regular cardiovascular exercise?"}
+{"text": "Can you help me write unit tests using pytest for a calculator function?"}
+{"text": "What is the difference between machine code, assembly, and high-level code?"}
+{"text": "How do astronomers detect exoplanets orbiting distant stars?"}
+{"text": "Can you recommend three introductory books on European art history?"}
+{"text": "How does DNS resolution translate domain names to IP addresses?"}
+{"text": "What is the difference between concurrency and parallelism?"}
+{"text": "How can a beginner start learning basic guitar chords?"}
+{"text": "Explain the concept of gradient descent optimization in deep learning."}
+{"text": "What is the function of the human spleen in the circulatory system?"}
+{"text": "Can you write an apology letter to a colleague for missing a scheduled meeting?"}
+{"text": "How do touchscreens detect finger input using capacitive sensing?"}
+{"text": "What are SOLID design principles in software engineering?"}
+{"text": "How do tides occur due to gravitational interactions between the Earth and Moon?"}
+{"text": "What is the purpose of the HTTP status code 404 vs 500?"}
+{"text": "How do plants adapt to survive in arid desert environments?"}
+{"text": "Can you write a Python function that checks if a string is a palindrome?"}
+{"text": "What are the primary differences between microservices and monolithic architectures?"}
+{"text": "How does an internal combustion engine work through its four strokes?"}
+{"text": "Explain the difference between precision and recall in classification metrics."}
+{"text": "What is the purpose of using design patterns like Factory or Singleton?"}
+{"text": "How do meteorologists predict severe weather using Doppler radar?"}
+{"text": "Could you draft a 3-day travel itinerary for visiting Kyoto, Japan?"}
+{"text": "What are WebSockets and how do they enable full-duplex communication?"}
+{"text": "How does honey resist spoiling for decades without refrigeration?"}
+{"text": "Explain the difference between deep copy and shallow copy in Python."}
+{"text": "What was the significance of the invention of the Gutenberg printing press?"}
+{"text": "How do modern smartphones achieve water resistance ratings like IP68?"}
+{"text": "Can you explain the bias-variance tradeoff in statistical learning?"}
+{"text": "How do I read and write JSON files in Python using the json library?"}
+{"text": "What is the function of ribosomes during cellular protein synthesis?"}
+{"text": "Could you help me outline a beginner workout routine for bodyweight fitness?"}
+{"text": "How do secure hash functions like SHA-256 ensure collision resistance?"}
+{"text": "What are the main causes and effects of ocean acidification?"}
+{"text": "How do I sort a dictionary by its values in Python?"}
+{"text": "Explain how peer-to-peer file sharing works in the BitTorrent protocol."}
+{"text": "What are some effective techniques for active listening during team discussions?"}
+{"text": "How does the immune system differentiate between self and non-self cells?"}
+{"text": "Can you provide a simple regex pattern to validate basic email formats?"}
+{"text": "What is the greenhouse effect and why is it necessary for life on Earth?"}
+{"text": "How do compilers translate source code into abstract syntax trees?"}
+{"text": "What are the rules of chess regarding castling and en passant?"}
+{"text": "How do modern solid-state drives (SSDs) store data using flash NAND memory?"}
+{"text": "Can you write a thank-you note to a teacher who wrote a recommendation letter?"}
+{"text": "What is the purpose of semantic versioning (SemVer) in software libraries?"}
+{"text": "How do whales navigate long migratory routes across oceans?"}
+{"text": "Explain the difference between cross-validation and a simple train-test split."}

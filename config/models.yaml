@@ -1,0 +1,26 @@
+# Attacker and judge share the same Ollama model family but run in
+# completely separate client instances (no shared conversation context).
+# Ideally use a different model for judge to reduce evaluation bias;
+# if the same model is used, a runtime warning is emitted.
+attacker:
+  provider: ollama
+  model: llama3:8b
+  base_url: http://localhost:11434
+  timeout: 120
+
+judge:
+  provider: ollama
+  model: qwen2.5:7b      # distinct default from attacker (llama3:8b)
+  base_url: http://localhost:11434
+  timeout: 120
+
+targets:
+  - model: llama3:8b
+    base_url: http://localhost:11434
+    timeout: 120
+  - model: qwen2.5:7b
+    base_url: http://localhost:11434
+    timeout: 120
+  - model: mistral:7b
+    base_url: http://localhost:11434
+    timeout: 120
